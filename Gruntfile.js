@@ -294,6 +294,16 @@ module.exports = function (grunt) {
                 'svgmin',
                 'htmlmin'
             ]
+        },
+        'gh-pages': {
+            options: {
+                base: 'dist',
+                user: {
+                    name: 'Jeff Jo and Forum Parmar',
+                    email: 'jeffzzang@gmail.com'
+                }
+            },
+            src: ['**']
         }
     });
 
@@ -343,4 +353,6 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.loadNpmTasks('grunt-gh-pages');
 };
