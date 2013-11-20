@@ -88,7 +88,7 @@
               }
             }
 
-            fs.writeFileSync(outputFile, JSON.stringify(stops));
+            fs.writeFileSync(outputFile, JSON.stringify(stops, null, 4));
 
             console.log("Done writing data");
         })
