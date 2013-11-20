@@ -34,8 +34,18 @@ require.config({
 
 require([
     'backbone',
-    'views/application'
-], function (Backbone, ApplicationView) {
+    'views/application',
+    'handlebars'
+], function (Backbone, ApplicationView, Handlebars) {
+    //TODO: Bring in moment
+    Handlebars.registerHelper('formatDate', function(date){
+        return date.toTimeString();
+    });
+
+    Handlebars.registerHelper('lengthInMinutes', function(obj){
+        return (obj.arrivalTime - obj.departureTime) / 1000 / 60
+    });
+
     Backbone.history.start();
     var appView = new ApplicationView({el: $('#app_container')});
     appView.render();

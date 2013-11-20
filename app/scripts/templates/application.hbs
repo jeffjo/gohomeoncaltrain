@@ -8,7 +8,7 @@
 
     <div id='candidate_caltrain_times'>
         {{#each candidateCaltrainTimes}}
-        {{departureTime}} - {{arrivalTime}}
+        {{formatDate departureTime}} - {{formatDate arrivalTime}} ({{lengthInMinutes this}} minutes)<br/>
         {{/each}}
     </div>
 </div>
