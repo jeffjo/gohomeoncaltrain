@@ -56,6 +56,10 @@ define([
                 el: this.$('#caltrain_list_view')
             });
 
+            this._caltrainListView.on('click', function (caltrainModel) {
+                //TODO: Update muni list view here
+            });
+
             this._selectCaltrainView.on('destinationSelected', function(destination){
                 //TODO: Save destination preference in cookie
                 this.candidateCaltrainTimes = this._calculateRemainingCaltrainTimes(destination);

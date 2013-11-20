@@ -14,7 +14,14 @@ define([
         render: function () {
             this.$el.html(this.template(this.model));
             return this;
+        },
+        events: {
+          'click': 'clicked'
+        },
+        clicked: function(ev){
+            this.trigger('click', this.model);
         }
+
     });
 
     return CaltrainRowView;

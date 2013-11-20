@@ -18,7 +18,11 @@ define([
             this.model.forEach(function(value) {
                 var view = new CaltrainRowView({model: value});
                 this.$el.append(view.render().el);
+                view.on('click', function(caltrainModel) {
+                    this.trigger('click', caltrainModel);
+                }, this);
                 this._views.push(view);
+
             }, this);
             return this;
         },
@@ -26,6 +30,7 @@ define([
             //TODO: Is this all we need to avoid memory leaks?
             this._views.forEach(function(curView) {
                 curView.remove();
+                curView.off('click');
             });
             this.model = newModel;
         }
