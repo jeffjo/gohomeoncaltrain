@@ -88,8 +88,7 @@
               }
             }
 
-            var outputStr = "GOHOMEONCALTRAIN.CaltrainTimetable = " + JSON.stringify(stops);
-            fs.writeFileSync(outputFile, outputStr);
+            fs.writeFileSync(outputFile, JSON.stringify(stops));
 
             console.log("Done writing data");
         })
