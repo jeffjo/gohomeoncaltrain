@@ -1,4 +1,4 @@
-[
+GOHOMEONCALTRAIN.MuniFixture = [
   {
     "id": "47",
     "timeToDepartureStop": 180,
@@ -27,4 +27,4 @@
     "departureStopName": "Van Ness Station",
     "arrivalStopId": "17397"
   }
-]
+];
