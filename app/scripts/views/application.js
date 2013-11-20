@@ -11,10 +11,12 @@ define([
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
+        initialize: function () {
+            this.caltrainFixtureData = caltrainFixtureData;
+        },
         render: function () {
-            this.$el.html(this.template());
+            this.$el.html(this.template(this));
             this._destinationCaltrainSelect = this.$('#destination_caltrain_select');
-            this._populateCaltrainDestinations();
             //TODO: Load destination preference from cookie
             return this;
         },
@@ -24,13 +26,27 @@ define([
         caltrainDestinationDidChange: function(ev){
             console.log("changed to: " + this._destinationCaltrainSelect.val());
             //TODO: Save destination preference in cookie
+            this.candidateCaltrainTimes = this._calculateRemainingCaltrainTimes();
         },
-        _populateCaltrainDestinations: function(){
-            var options = []
-            $.each(caltrainFixtureData, function (key, value) {
-                options.push("<option value='" + key + "'>" + key + "</option>");
+        _calculateRemainingCaltrainTimes: function () {
+            var destination = this._destinationCaltrainSelect.val();
+
+            var times = this.caltrainFixtureData[destination];
+            var candidateTimes = [];
+            times.forEach(function (value, index) {
+                var departureTime = new Date(value.departureTime);
+                var currentDate = new Date();
+                currentDate.setMonth(0);
+                currentDate.setDate(1);
+                currentDate.setYear(2013);
+
+                if (departureTime > currentDate){
+                    candidateTimes.push(value);
+                }
             });
-            this._destinationCaltrainSelect.html(options.join('\n'));
+
+            console.log("chose " + candidateTimes.length + " times");
+            return candidateTimes;
         }
     });
 

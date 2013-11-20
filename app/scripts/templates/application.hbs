@@ -1,5 +1,14 @@
 <div>
-  Where are you going?&nbsp;&nbsp;
-  <select id='destination_caltrain_select'>
-  </select>
+    Where are you going?&nbsp;&nbsp;
+    <select id='destination_caltrain_select'>
+        {{#each caltrainFixtureData}}
+        <option value='{{@key}}'>{{@key}}</option>
+        {{/each}}
+    </select>
+
+    <div id='candidate_caltrain_times'>
+        {{#each candidateCaltrainTimes}}
+        {{departureTime}} - {{arrivalTime}}
+        {{/each}}
+    </div>
 </div>
