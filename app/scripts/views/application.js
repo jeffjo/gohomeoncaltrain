@@ -5,10 +5,11 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'json!models/caltrain_fixture.json',
+    'json!models/json/caltrain_fixture.json',
     'views/select_caltrain',
-    'views/caltrain_list'
-], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView) {
+    'views/caltrain_list',
+    'collections/muni'
+], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection) {
     'use strict';
 
 
@@ -32,6 +33,9 @@ define([
                     });
                 }, this);
             }.bind(this));
+
+            var munis = new MuniCollection();
+            munis.fetch();
         },
         _coerceDateToCurrent: function (date, currentDate) {
             date.setMonth(currentDate.getMonth());
