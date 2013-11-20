@@ -33,7 +33,10 @@ require.config({
 });
 
 require([
-    'backbone'
-], function (Backbone) {
+    'backbone',
+    'views/application'
+], function (Backbone, ApplicationView) {
     Backbone.history.start();
+    var appView = new ApplicationView({el: $('#app_container')});
+    appView.render();
 });
