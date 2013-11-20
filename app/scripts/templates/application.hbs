@@ -1,12 +1,5 @@
 <div>
-    Where are you going?&nbsp;&nbsp;
-    <select id='destination_caltrain_select'>
-        {{{selectOptions caltrainDestinations 'value' 'text' selectedCaltrainDestintation}}}
-    </select>
+    <div id="select_caltrain_view"></div>
 
-    <div id='candidate_caltrain_times'>
-        {{#each candidateCaltrainTimes}}
-        {{formatDate departureTime}} - {{formatDate arrivalTime}} ({{lengthInMinutes this}} minutes)<br/>
-        {{/each}}
-    </div>
+    <div id='caltrain_list_view'></div>
 </div>

@@ -5,14 +5,17 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'json!models/caltrain_fixture.json'
-], function ($, _, Backbone, JST, caltrainFixtureData) {
+    'json!models/caltrain_fixture.json',
+    'views/select_caltrain',
+    'views/caltrain_list'
+], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView) {
     'use strict';
 
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
         initialize: function () {
+            //TODO: functionize
             this.caltrainFixtureData = {};
             $.each(caltrainFixtureData, function (key, value) {
                 this.caltrainFixtureData[key] = [];
@@ -29,13 +32,6 @@ define([
                     });
                 }, this);
             }.bind(this));
-
-            this.caltrainDestinations = Object.keys(this.caltrainFixtureData).map(function(value, index){
-                return {
-                    value: value,
-                    text: value
-                }});
-
         },
         _coerceDateToCurrent: function (date, currentDate) {
             date.setMonth(currentDate.getMonth());
@@ -44,23 +40,29 @@ define([
         },
         render: function () {
             this.$el.html(this.template(this));
-            this._destinationCaltrainSelect = this.$('#destination_caltrain_select');
+
             //TODO: Load destination preference from cookie
+            this._selectCaltrainView = new SelectCaltrainView({
+                model: Object.keys(this.caltrainFixtureData),
+                el: this.$('#select_caltrain_view')
+            });
+            this._selectCaltrainView.render();
+
+            this._caltrainListView = new CaltrainListView({
+                el: this.$('#caltrain_list_view')
+            });
+
+            this._selectCaltrainView.on('destinationSelected', function(destination){
+                //TODO: Save destination preference in cookie
+                this.candidateCaltrainTimes = this._calculateRemainingCaltrainTimes(destination);
+
+                this._caltrainListView.updateModel(this.candidateCaltrainTimes);
+                this._caltrainListView.render();
+            }, this);
+
             return this;
         },
-        events: {
-          "change #destination_caltrain_select": "caltrainDestinationDidChange"
-        },
-        caltrainDestinationDidChange: function(ev){
-            console.log("changed to: " + this._destinationCaltrainSelect.val());
-            this.selectedCaltrainDestintation = this._destinationCaltrainSelect.val();
-            //TODO: Save destination preference in cookie
-            this.candidateCaltrainTimes = this._calculateRemainingCaltrainTimes();
-            this.render();
-        },
-        _calculateRemainingCaltrainTimes: function () {
-            var destination = this._destinationCaltrainSelect.val();
-
+        _calculateRemainingCaltrainTimes: function (destination) {
             var times = this.caltrainFixtureData[destination];
             var candidateTimes = [];
             times.forEach(function (value, index) {
