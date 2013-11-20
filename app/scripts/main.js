@@ -46,6 +46,22 @@ require([
         return (obj.arrivalTime - obj.departureTime) / 1000 / 60
     });
 
+    Handlebars.registerHelper('selectOptions', function(options, valueKey, textKey, selectedValue) {
+        console.log(selectedValue);
+        var out = [];
+        for (var x = 0; x < options.length; x++){
+            var optionStr = '<option value="' + options[x][valueKey] + '"';
+            if (options[x][valueKey] === selectedValue){
+                optionStr += ' selected="selected" ';
+            }
+            optionStr += '>';
+            optionStr += options[x][textKey];
+            optionStr += '</option>';
+            out.push(optionStr);
+        }
+        return out.join('\n');
+    });
+
     Backbone.history.start();
     var appView = new ApplicationView({el: $('#app_container')});
     appView.render();

@@ -1,9 +1,7 @@
 <div>
     Where are you going?&nbsp;&nbsp;
     <select id='destination_caltrain_select'>
-        {{#each caltrainFixtureData}}
-        <option value='{{@key}}'>{{@key}}</option>
-        {{/each}}
+        {{{selectOptions caltrainDestinations 'value' 'text' selectedCaltrainDestintation}}}
     </select>
 
     <div id='candidate_caltrain_times'>

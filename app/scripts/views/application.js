@@ -29,6 +29,13 @@ define([
                     });
                 }, this);
             }.bind(this));
+
+            this.caltrainDestinations = Object.keys(this.caltrainFixtureData).map(function(value, index){
+                return {
+                    value: value,
+                    text: value
+                }});
+
         },
         _coerceDateToCurrent: function (date, currentDate) {
             date.setMonth(currentDate.getMonth());
@@ -37,9 +44,7 @@ define([
         },
         render: function () {
             this.$el.html(this.template(this));
-            if (!this._destinationCaltrainSelect){
-                this._destinationCaltrainSelect = this.$('#destination_caltrain_select');
-            }
+            this._destinationCaltrainSelect = this.$('#destination_caltrain_select');
             //TODO: Load destination preference from cookie
             return this;
         },
