@@ -1,0 +1,7 @@
+Where are you going?&nbsp;&nbsp;
+<select id='destination_caltrain_select'>
+    {{#each this}}
+    <option value="{{value}}" {{#if isSelected}}selected="selected"{{/if}}>{{text}}</option>
+    {{/each}}
+</select>
+
