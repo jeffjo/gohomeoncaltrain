@@ -15,6 +15,7 @@ define([
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
         initialize: function () {
+            //TODO: functionize
             this.caltrainFixtureData = {};
             $.each(caltrainFixtureData, function (key, value) {
                 this.caltrainFixtureData[key] = [];
