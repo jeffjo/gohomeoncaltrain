@@ -17,7 +17,7 @@
     //TODO: Make this an optional parameter?
     var DATA_URL = 'http://www.gtfs-data-exchange.com/agency/caltrain/latest.zip';
     //TODO: Make this a parameter??
-    var outputFile = "../app/scripts/models/caltrain_fixture.js";
+    var outputFile = "../app/scripts/models/caltrain_fixture.json";
     var calendar = [],
         trips = [],
         stopTimes = [],
