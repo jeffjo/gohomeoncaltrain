@@ -16,9 +16,9 @@ define([
             return this;
         },
         events: {
-          'click': 'clicked'
+            'click': 'clicked'
         },
-        clicked: function(ev){
+        clicked: function(){
             this.trigger('click', this.model);
         }
 

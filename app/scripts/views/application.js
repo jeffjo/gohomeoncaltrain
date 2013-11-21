@@ -22,7 +22,7 @@ define([
             $.each(caltrainFixtureData, function (key, value) {
                 this.caltrainFixtureData[key] = [];
 
-                value.forEach(function (value, index) {
+                value.forEach(function (value) {
                     var departureTime = new Date(value.departureTime);
                     var arrivalTime = new Date(value.arrivalTime);
                     var currentDate = new Date();
@@ -63,7 +63,7 @@ define([
                 el: this.$('#muni_list_view')
             });
 
-            this._caltrainListView.on('click', function (caltrainModel) {
+            this._caltrainListView.on('click', function (/*caltrainModel*/) {
                 //TODO: Update muni list view here
             }, this);
 
@@ -83,7 +83,7 @@ define([
         _calculateRemainingCaltrainTimes: function (destination) {
             var times = this.caltrainFixtureData[destination];
             var candidateTimes = [];
-            times.forEach(function (value, index) {
+            times.forEach(function (value) {
                 var currentDate = new Date();
 
                 if (value.departureTime > currentDate){

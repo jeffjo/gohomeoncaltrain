@@ -12,7 +12,7 @@ define([
         tagName: 'li',
         template: JST['app/scripts/templates/muni_row.hbs'],
         initialize: function() {
-            this.model.bind("change", _.bind(this.render, this));
+            this.model.bind('change', _.bind(this.render, this));
             this.model.fetch();
             setInterval(function(){
                 this.model.fetch();

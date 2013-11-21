@@ -13,7 +13,7 @@ define([
         tagName: 'ul',
         template: JST['app/scripts/templates/muni_list.hbs'],
         initialize: function () {
-            this.collection.bind("reset", _.bind(this.render, this));
+            this.collection.bind('reset', _.bind(this.render, this));
             this.collection.fetch({reset: true});
         },
         render: function(){

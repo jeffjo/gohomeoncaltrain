@@ -12,7 +12,7 @@ define([
         initialize: function(options){
             this.selectModel = [];
 
-            this.model.forEach(function (value, index) {
+            this.model.forEach(function (value) {
                 this.selectModel.push({
                     value: value,
                     text: value,
@@ -26,10 +26,10 @@ define([
             return this;
         },
         events: {
-            "change #destination_caltrain_select": "caltrainDestinationDidChange"
+            'change #destination_caltrain_select': 'caltrainDestinationDidChange'
         },
-        caltrainDestinationDidChange: function(ev){
-            var selectedValue = this.$("#destination_caltrain_select").val();
+        caltrainDestinationDidChange: function(){
+            var selectedValue = this.$('#destination_caltrain_select').val();
             //TODO: try to optimize
             this.selectModel.forEach(function (value) {
                 value.isSelected = (value.value === selectedValue);
