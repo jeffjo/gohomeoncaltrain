@@ -28,22 +28,25 @@ require.config({
         bootstrap: 'vendor/bootstrap',
         handlebars: '../bower_components/handlebars/handlebars',
         text: '../bower_components/requirejs-text/text',
-        json: '../bower_components/requirejs-plugins/src/json'
+        json: '../bower_components/requirejs-plugins/src/json',
+        moment: '../bower_components/momentjs/moment'
     }
 });
 
 require([
     'backbone',
     'views/application',
-    'handlebars'
-], function (Backbone, ApplicationView, Handlebars) {
-    //TODO: Bring in moment
-    Handlebars.registerHelper('formatDate', function(date){
-        return date.toTimeString();
+    'handlebars',
+    'moment'
+], function (Backbone, ApplicationView, Handlebars, moment) {
+
+    //TODO: Put handlebars helpers in seperate file
+    Handlebars.registerHelper('formatDate', function(date, format){
+        return moment(date).format(format);
     });
 
-    Handlebars.registerHelper('lengthInMinutes', function(obj){
-        return (obj.arrivalTime - obj.departureTime) / 1000 / 60
+    Handlebars.registerHelper('timeDiffInMinutes', function(departureTime, arrivalTime){
+        return moment(arrivalTime).diff(departureTime, 'minutes');
     });
 
     Backbone.history.start();
