@@ -10,7 +10,6 @@ define([
     'use strict';
 
     var CaltrainListView = Backbone.View.extend({
-        tagName: 'ul',
         template: JST['app/scripts/templates/caltrain_list.hbs'],
         _views: [],
         render: function(){

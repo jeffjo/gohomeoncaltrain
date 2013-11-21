@@ -9,8 +9,8 @@ define([
     'use strict';
 
     var MuniRowView = Backbone.View.extend({
-        tagName: 'li',
         template: JST['app/scripts/templates/muni_row.hbs'],
+        className: 'muni-row',
         initialize: function() {
             this.model.bind('change', _.bind(this.render, this));
             this.model.fetch();

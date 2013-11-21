@@ -1,17 +1,24 @@
-{{id}}: {{departureStopName}} ({{minutesToDepartureStop}} minute(s) to walk)
+<p >
+    <span class='muni-route-heading'>
+        {{id}}: {{departureStopName}}
+    </span>
+    ({{minutesToDepartureStop}} minute(s) to walk)
+</p>
 {{#if predictions}}
-<table>
-    <tr>
-        <td>Arrival Time</td>
-        <td>Departure Time </td>
-    </tr>
+<table id='muni-prediction-table'>
+    <thead>
+        <tr>
+            <th class='muni-prediction-arrival-time-col'>Arrives @Caltrain</th>
+            <th class='muni-prediction-departure-time-col'>Departs In</th>
+        </tr>
+    </thead>
     {{#each predictions}}
         <tr>
             <td>{{arrivalTime}}</td>
-            <td>{{departureTime}} ({{departureMinutes}} minute(s))</td>
+            <td>{{departureMinutes}} minute(s)<span class='muni-prediction-departure-minutes'>&nbsp;&nbsp;{{departureTime}}</span></td>
         </tr>
     {{/each}}
 </table>
 {{else}}
-There are no predictions available
+<p class='italic'>There are no predictions available</p>
 {{/if}}
