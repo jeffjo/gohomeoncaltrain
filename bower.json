@@ -10,7 +10,8 @@
     "requirejs-text": "~2.0.5",
     "modernizr": "~2.6.2",
     "handlebars": "~1.0.0",
-    "requirejs-plugins": "~1.0.2"
+    "requirejs-plugins": "~1.0.2",
+    "momentjs": "~2.4.0"
   },
   "devDependencies": {}
 }
