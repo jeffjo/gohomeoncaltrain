@@ -37,8 +37,9 @@ require([
     'backbone',
     'views/application',
     'handlebars',
-    'moment'
-], function (Backbone, ApplicationView, Handlebars, moment) {
+    'moment',
+    'templates'
+], function (Backbone, ApplicationView, Handlebars, moment, JST) {
 
     //TODO: Put handlebars helpers in seperate file
     Handlebars.registerHelper('formatDate', function(date, format){
@@ -48,6 +49,7 @@ require([
     Handlebars.registerHelper('timeDiffInMinutes', function(departureTime, arrivalTime){
         return moment(arrivalTime).diff(departureTime, 'minutes');
     });
+    Handlebars.registerPartial('twitter', JST['app/scripts/templates/twitter.hbs']);
 
     Backbone.history.start();
     var appView = new ApplicationView({el: $('#app_container')});
