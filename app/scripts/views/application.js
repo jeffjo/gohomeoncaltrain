@@ -8,8 +8,9 @@ define([
     'json!models/json/caltrain_fixture.json',
     'views/select_caltrain',
     'views/caltrain_list',
-    'collections/muni'
-], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection) {
+    'collections/muni',
+    'views/muni_list'
+], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection, MuniListView) {
     'use strict';
 
 
@@ -33,9 +34,6 @@ define([
                     });
                 }, this);
             }.bind(this));
-
-            var munis = new MuniCollection();
-            munis.fetch();
         },
         _coerceDateToCurrent: function (date, currentDate) {
             date.setMonth(currentDate.getMonth());
@@ -55,10 +53,13 @@ define([
             this._caltrainListView = new CaltrainListView({
                 el: this.$('#caltrain_list_view')
             });
-
+            this._muniListView = new MuniListView({
+                collection: new MuniCollection(),
+                el: this.$('#muni_list_view')
+            });
             this._caltrainListView.on('click', function (caltrainModel) {
                 //TODO: Update muni list view here
-            });
+            }, this);
 
             this._selectCaltrainView.on('destinationSelected', function(destination){
                 //TODO: Save destination preference in cookie
