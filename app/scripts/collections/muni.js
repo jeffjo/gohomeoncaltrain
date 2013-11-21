@@ -9,7 +9,7 @@ define([
 
     var MuniCollection = Backbone.Collection.extend({
         model: MuniModel,
-        url: '/scripts/models/json/muni_fixture.json'
+        url: 'scripts/models/json/muni_fixture.json'
     });
 
     return MuniCollection;
