@@ -3,8 +3,9 @@
 define([
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone) {
+    'backbone',
+    'moment'
+], function ($, _, Backbone, moment) {
     'use strict';
 
     var MuniModel = Backbone.Model.extend({
@@ -36,12 +37,14 @@ define([
                 return arrival.vehicle_id === departure.vehicle_id;
               })[0];
               var walkTime = self.get('minutesToDepartureStop');
-              if(arrival && arrival.minutes > departure.minutes && departure.minutes >= walkTime) {
+              if(arrival && arrival.minutes > departure.minutes) {
                 predictions.push({
                     "minutesToDepartureStop": walkTime,
                     "departureMinutes": departure.minutes,
                     "arrivalMinutes": arrival.minutes,
-                    "tripTime": walkTime + arrival.minutes - departure.minutes
+                    "tripTime": walkTime + arrival.minutes - departure.minutes,
+                    "departureTime": moment().add(departure.seconds, 'seconds').format("HH:mm A"),
+                    "arrivalTime": moment().add(arrival.seconds, 'seconds').format("HH:mm A")
                 });
               }
             });

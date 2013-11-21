@@ -1,5 +1,17 @@
-{{id}}
-{{#each predictions}}
-{{minutesToDepartureStop}}+{{arrivalMinutes}}-{{departureMinutes}}={{tripTime}}
-
-{{/each}}
+{{id}}: {{departureStopName}} ({{minutesToDepartureStop}} minute(s) to walk)
+{{#if predictions}}
+<table>
+    <tr>
+        <td>Arrival Time</td>
+        <td>Departure Time </td>
+    </tr>
+    {{#each predictions}}
+        <tr>
+            <td>{{arrivalTime}}</td>
+            <td>{{departureTime}} ({{departureMinutes}} minute(s))</td>
+        </tr>
+    {{/each}}
+</table>
+{{else}}
+There are no predictions available
+{{/if}}
