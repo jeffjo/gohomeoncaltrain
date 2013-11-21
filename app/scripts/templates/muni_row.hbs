@@ -1,9 +1,5 @@
 {{id}}
-Departures:
-{{#each departurePredictions}}
-    {{minutes}}
-{{/each}}
-Arrivals:
-{{#each arrivalPredictions}}
-    {{minutes}}
+{{#each predictions}}
+{{minutesToDepartureStop}}+{{arrivalMinutes}}-{{departureMinutes}}={{tripTime}}
+
 {{/each}}

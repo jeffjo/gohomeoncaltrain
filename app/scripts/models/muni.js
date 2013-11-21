@@ -9,8 +9,7 @@ define([
 
     var MuniModel = Backbone.Model.extend({
         defaults: {
-          departurePredictions: [],
-          arrivalPredictions: []
+          predictions: []
         },
         urlFormat: 'http://proximobus.appspot.com/agencies/sf-muni/stops/#{stopId}/predictions/by-route/#{routeId}.json',
 
@@ -24,14 +23,31 @@ define([
             type: "GET",
             dataType: "json"
           };
-          var departurePromise = Backbone.ajax(_.extend(params, options)).then(function(data) {
-            self.set('departurePredictions', data.items);
-          });
+          var departurePromise = Backbone.ajax(_.extend(params, options));
           options.url = arrivalUrl;
-          var arrivalPromise = Backbone.ajax(_.extend(params, options)).then(function(data) {
-            self.set('arrivalPredictions', data.items);
+          var arrivalPromise = Backbone.ajax(_.extend(params, options));
+          return $.when(departurePromise, arrivalPromise).then(function(departureData, arrivalData){
+            var departures = departureData[0].items;
+            var arrivals = arrivalData[0].items;
+
+            var predictions = [];
+            departures.forEach(function (departure) {
+              var arrival = arrivals.filter(function (arrival) {
+                return arrival.vehicle_id === departure.vehicle_id;
+              })[0];
+              var walkTime = self.get('minutesToDepartureStop');
+              if(arrival && arrival.minutes > departure.minutes && departure.minutes >= walkTime) {
+                predictions.push({
+                    "minutesToDepartureStop": walkTime,
+                    "departureMinutes": departure.minutes,
+                    "arrivalMinutes": arrival.minutes,
+                    "tripTime": walkTime + arrival.minutes - departure.minutes
+                });
+              }
+            });
+            self.set('predictions', predictions);
+
           });
-          return $.when(departurePromise, arrivalPromise);
         }
     });
 
