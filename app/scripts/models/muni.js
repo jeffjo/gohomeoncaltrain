@@ -44,8 +44,8 @@ define([
                             'departureMinutes': departure.minutes,
                             'arrivalMinutes': arrival.minutes,
                             'tripTime': walkTime + arrival.minutes - departure.minutes,
-                            'departureTime': moment().add(departure.seconds, 'seconds').format('HH:mm A'),
-                            'arrivalTime': moment().add(arrival.seconds, 'seconds').format('HH:mm A')
+                            'departureTime': moment().add(departure.seconds, 'seconds'),
+                            'arrivalTime': moment().add(arrival.seconds, 'seconds')
                         });
                     }
                 });

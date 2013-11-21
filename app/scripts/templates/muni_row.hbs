@@ -14,8 +14,8 @@
     </thead>
     {{#each predictions}}
         <tr>
-            <td>{{arrivalTime}}</td>
-            <td>{{departureMinutes}} minute(s)<span class='muni-prediction-departure-minutes'>&nbsp;&nbsp;{{departureTime}}</span></td>
+            <td>{{formatDate arrivalTime 'hh:mm A'}}</td>
+            <td>{{departureMinutes}} minute(s)<span class='muni-prediction-departure-minutes'>&nbsp;&nbsp;{{formatDate departureTime 'hh:mm A'}}</span></td>
         </tr>
     {{/each}}
 </table>
