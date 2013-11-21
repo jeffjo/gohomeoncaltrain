@@ -12,7 +12,7 @@ define([
     'views/muni_list'
 ], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection, MuniListView) {
     'use strict';
-
+    var SELECTED_DESTINATION_LOCAL_STORAGE_KEY = 'selectedDestination';
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
@@ -42,34 +42,43 @@ define([
         },
         render: function () {
             this.$el.html(this.template(this));
-
-            //TODO: Load destination preference from cookie
+            var savedSelectedDestination = localStorage.getItem(SELECTED_DESTINATION_LOCAL_STORAGE_KEY);
             this._selectCaltrainView = new SelectCaltrainView({
                 model: Object.keys(this.caltrainFixtureData),
-                el: this.$('#select_caltrain_view')
+                el: this.$('#select_caltrain_view'),
+                selectedDestination: savedSelectedDestination
             });
             this._selectCaltrainView.render();
 
             this._caltrainListView = new CaltrainListView({
                 el: this.$('#caltrain_list_view')
             });
+
+            if (savedSelectedDestination !== null){
+                this._destinationSelected(savedSelectedDestination);
+            }
+
             this._muniListView = new MuniListView({
                 collection: new MuniCollection(),
                 el: this.$('#muni_list_view')
             });
+
             this._caltrainListView.on('click', function (caltrainModel) {
                 //TODO: Update muni list view here
             }, this);
 
-            this._selectCaltrainView.on('destinationSelected', function(destination){
-                //TODO: Save destination preference in cookie
-                this.candidateCaltrainTimes = this._calculateRemainingCaltrainTimes(destination);
-
-                this._caltrainListView.updateModel(this.candidateCaltrainTimes);
-                this._caltrainListView.render();
-            }, this);
+            this._selectCaltrainView.on('destinationSelected', this._destinationSelected, this);
 
             return this;
+        },
+        _destinationSelected: function(destination){
+            this.candidateCaltrainTimes = this._calculateRemainingCaltrainTimes(destination);
+
+            this._caltrainListView.updateModel(this.candidateCaltrainTimes);
+            this._caltrainListView.render();
+
+            localStorage.setItem(SELECTED_DESTINATION_LOCAL_STORAGE_KEY, destination);
+
         },
         _calculateRemainingCaltrainTimes: function (destination) {
             var times = this.caltrainFixtureData[destination];

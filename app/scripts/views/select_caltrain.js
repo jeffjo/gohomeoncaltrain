@@ -9,14 +9,14 @@ define([
     'use strict';
 
     var SelectCaltrainView = Backbone.View.extend({
-        initialize: function(){
+        initialize: function(options){
             this.selectModel = [];
 
             this.model.forEach(function (value, index) {
                 this.selectModel.push({
                     value: value,
                     text: value,
-                    isSelected: false
+                    isSelected: (value === options.selectedDestination)
                 });
             }, this);
         },
