@@ -9,6 +9,7 @@ define([
     'use strict';
 
     var CaltrainRowView = Backbone.View.extend({
+        className: 'caltrain-row',
         template: JST['app/scripts/templates/caltrain_row.hbs'],
         render: function () {
             this.$el.html(this.template(this.model));

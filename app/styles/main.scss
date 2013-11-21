@@ -27,7 +27,16 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     margin-bottom: 20px;
 }
 
-#muni-prediction-table{
+.muni-route-heading {
+    font-weight: bold;
+}
+
+.muni-prediction-departure-minutes {
+    font-size: .9em;
+    font-style: italic;
+}
+
+.muni-prediction-table{
     width: 100%;
 }
 
@@ -47,11 +56,3 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     font-style: italic;
 }
 
-.muni-route-heading {
-    font-weight: bold;
-}
-
-.muni-prediction-departure-minutes {
-    font-size: .9em;
-    font-style: italic;
-}
