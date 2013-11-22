@@ -9,8 +9,9 @@ define([
     'views/select_caltrain',
     'views/caltrain_list',
     'collections/muni',
-    'views/muni_list'
-], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection, MuniListView) {
+    'views/muni_list',
+    'views/muni_sorted_list'
+], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection, MuniListView, MuniSortedListView) {
     'use strict';
     var SELECTED_DESTINATION_LOCAL_STORAGE_KEY = 'selectedDestination';
 
@@ -58,9 +59,16 @@ define([
                 this._destinationSelected(savedSelectedDestination);
             }
 
+            this.muniCollection = new MuniCollection();
+
             this._muniListView = new MuniListView({
-                collection: new MuniCollection(),
+                collection: this.muniCollection,
                 el: this.$('#muni_list_view')
+            });
+
+            this._muniSortedListView = new MuniSortedListView({
+                collection: this.muniCollection,
+                el: this.$('#muni_sorted_list_view')
             });
 
             this._caltrainListView.on('click', function (caltrainModel) {

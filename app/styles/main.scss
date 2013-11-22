@@ -33,7 +33,12 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 #muni_list_view {
     float: right;
-    width: 50%;
+    width: 25%;
+}
+
+#muni_sorted_list_view {
+    float: right;
+    width: 25%;
 }
 
 .muni-row {
@@ -57,12 +62,16 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     color: red;
 }
 
+.muni-prediction-muni-col {
+    width: 20%;
+}
+
 .muni-prediction-arrival-time-col {
     width: 30%;
 }
 
 .muni-prediction-departure-time-col {
-    width: 70%;
+    width: 50%;
 }
 
 

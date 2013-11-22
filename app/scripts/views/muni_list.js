@@ -11,7 +11,6 @@ define([
 
     var MuniListView = Backbone.View.extend({
         template: JST['app/scripts/templates/muni_list.hbs'],
-        sortedTemplate: JST['app/scripts/template/muni_sorted_list.hbs'],
         initialize: function () {
             this.collection.bind('reset', _.bind(this.render, this));
             this.collection.fetch({reset: true});

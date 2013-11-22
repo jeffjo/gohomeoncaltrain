@@ -40,6 +40,7 @@ define([
                     var walkTime = self.get('minutesToDepartureStop');
                     if(arrival && arrival.minutes > departure.minutes && departure.minutes >= walkTime) {
                         predictions.push({
+                            'id': self.get('id'),
                             'minutesToDepartureStop': walkTime,
                             'departureMinutes': departure.minutes,
                             'arrivalMinutes': arrival.minutes,
@@ -50,7 +51,6 @@ define([
                     }
                 });
                 self.set('predictions', predictions);
-
             });
         }
     });
