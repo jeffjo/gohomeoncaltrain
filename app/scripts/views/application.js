@@ -18,7 +18,16 @@ define([
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
         events: {
-            'change #toggle_view_checkbox': 'toggleViewWasChanged'
+            'change #toggle_view_checkbox': 'toggleViewWasChanged',
+            'change #toggle_caltrain_list': 'toggleCaltrainList'
+        },
+        toggleCaltrainList: function(ev){
+            if (ev.target.checked){
+                $('#caltrain_list_view').css('height', '100%');
+            }
+            else{
+                $('#caltrain_list_view').css('height', '110px');
+            }
         },
         toggleViewWasChanged: function(ev){
             if (ev.target.checked){
