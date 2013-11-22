@@ -4,7 +4,7 @@
     </span>
     ({{minutesToDepartureStop}} min. walk to MUNI)
 </p>
-{{#if predictions}}
+{{#if filteredPredictions}}
 <table class='muni-prediction-table'>
     <thead>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#each predictions}}
+        {{#each filteredPredictions}}
         <tr>
             <td>{{formatDate arrivalTime 'hh:mm A'}}</td>
             <td>
@@ -25,5 +25,5 @@
     </tbody>
 </table>
 {{else}}
-<p class='italic'>There are no predictions available</p>
+<p class='italic'>Sorry, no muni options available to make this train.</p>
 {{/if}}

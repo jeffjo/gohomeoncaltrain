@@ -9,7 +9,7 @@ define([
 ], function ($, _, Backbone, JST, moment) {
     'use strict';
 
-    var CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI = 5;
+    var CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI = 10;
 
     var MuniRowView = Backbone.View.extend({
         template: JST['app/scripts/templates/muni_row.hbs'],
@@ -24,8 +24,12 @@ define([
             }.bind(this), 30000);
         },
         render: function() {
+            this.model.set('filteredPredictions', this.model.get('predictions').filter(function(curPrediction){
+                return ((this._caltrainModel === null) || moment(this._caltrainModel.departureTime).isAfter(curPrediction.arrivalTime));
+            }, this));
+
             this.$el.html(this.template(this.model.toJSON()));
-            this.model.get('predictions').forEach(function(curPrediction, index){
+            this.model.get('filteredPredictions').forEach(function(curPrediction, index){
                 var curPredictionRow = this.$('tbody > tr').eq(index);
                 var departsInCell = curPredictionRow.find('td').eq(1);
 
@@ -35,19 +39,6 @@ define([
                 else{
                     departsInCell.removeClass('color-red');
                 }
-
-                if (this._caltrainModel !== null){
-                    if (moment(this._caltrainModel.departureTime).isBefore(curPrediction.arrivalTime)){
-                        // curPredictionRow.addClass('color-grey');
-                        curPredictionRow.hide();
-                        departsInCell.removeClass('color-red');
-                    }
-                    else{
-                        // curPredictionRow.removeClass('color-grey');
-                        curPredictionRow.show();
-                    }
-                }
-
             }, this);
             return this;
         },
