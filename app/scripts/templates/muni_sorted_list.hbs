@@ -14,7 +14,7 @@
         {{#each predictions}}
         <tr>
             <td>{{id}}</td>
-            <td>{{departureMinutes}} min.</td>
+            <td {{#if cuttingClose}}class='color-red'{{/if}}>{{departureMinutes}} min.</td>
             <td>{{formatDate arrivalTime 'hh:mm A'}}</td>
         </tr>
         {{/each}}

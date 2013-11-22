@@ -17,7 +17,7 @@
         <tr>
             <td>{{formatDate arrivalTime 'hh:mm A'}}</td>
             <td>
-                <span class='muni-prediction-departure-minutes'>{{departureMinutes}} min.</span>
+                <span class='muni-prediction-departure-minutes {{#if cuttingClose}}color-red{{/if}}'>{{departureMinutes}} min.</span>
                 <span class='muni-prediction-departure-time'>&nbsp;&nbsp;{{formatDate departureTime 'hh:mm A'}} </span>
             </td>
         </tr>

@@ -8,6 +8,8 @@ define([
 ], function ($, _, Backbone, JST) {
     'use strict';
 
+    var CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI = 10;
+
     var MuniSortedListView = Backbone.View.extend({
         template: JST['app/scripts/templates/muni_sorted_list.hbs'],
         initialize: function() {
@@ -24,6 +26,7 @@ define([
           this.collection.models.forEach(function(model){
             model.get('predictions').forEach(function(prediction){
                 if(!this.departureTime || this.departureTime > prediction.arrivalTime) {
+                    prediction.cuttingClose = prediction.departureMinutes < CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI;
                     predictions.push(prediction);
                 }
             }, this);

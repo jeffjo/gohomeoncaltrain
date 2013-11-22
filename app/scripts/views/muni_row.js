@@ -30,15 +30,7 @@ define([
 
             this.$el.html(this.template(this.model.toJSON()));
             this.model.get('filteredPredictions').forEach(function(curPrediction, index){
-                var curPredictionRow = this.$('tbody > tr').eq(index);
-                var departsInCell = curPredictionRow.find('td').eq(1);
-
-                if (curPrediction.departureMinutes < CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI){
-                    departsInCell.addClass('color-red');
-                }
-                else{
-                    departsInCell.removeClass('color-red');
-                }
+                curPrediction.cuttingClose = curPrediction.departureMinutes < CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI;
             }, this);
             return this;
         },
