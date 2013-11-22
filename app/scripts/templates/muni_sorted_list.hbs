@@ -1,20 +1,18 @@
+<div class='no-routes-available'>No Routes</div>
 <table class='muni-prediction-table'>
     <thead>
         <tr>
             <th class='muni-prediction-muni-col'>Muni</th>
-            <th class='muni-prediction-arrival-time-col'>Arrives @Caltrain</th>
             <th class='muni-prediction-departure-time-col'>Departs In</th>
+            <th class='muni-prediction-arrival-time-col'>Arrives @Caltrain</th>
         </tr>
     </thead>
     <tbody>
         {{#each this}}
         <tr>
             <td>{{id}}</td>
+            <td>{{departureMinutes}} min.</td>
             <td>{{formatDate arrivalTime 'hh:mm A'}}</td>
-            <td>
-                <span class='muni-prediction-departure-minutes'>{{departureMinutes}} min.</span>
-                <span class='muni-prediction-departure-time'>&nbsp;&nbsp;{{formatDate departureTime 'hh:mm A'}} </span>
-            </td>
         </tr>
         {{/each}}
     </tbody>

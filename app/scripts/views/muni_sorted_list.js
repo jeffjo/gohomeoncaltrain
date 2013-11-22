@@ -26,8 +26,30 @@ define([
             });
           });
           return predictions;
+        },
+        highlightTimes: function(caltrainModel) {
+            // Find and highlight min trip time
+            var selectedMuniIndex = -1;
+            var minTime = Number.MAX_VALUE;
+            var departureTime = caltrainModel.departureTime;
+            this.getPredictions().forEach(function(prediction, index){
+                this.$('tbody > tr').removeClass('is-optimal');
+                if(departureTime > prediction.arrivalTime) {
+                    var tripTime = (departureTime - prediction.arrivalTime)/60000 + prediction.tripMinutes;
+                    if(tripTime < minTime) {
+                        minTime = tripTime;
+                        selectedMuniIndex = index;
+                    }
+                }
+            }, this);
+            if(selectedMuniIndex !== -1) {
+                this.$('tbody > tr').eq(selectedMuniIndex).addClass('is-optimal');
+                this.$('.no-routes-available').hide();
+            }
+            else {
+                this.$('.no-routes-available').show();
+            }
         }
     });
-
     return MuniSortedListView;
 });
