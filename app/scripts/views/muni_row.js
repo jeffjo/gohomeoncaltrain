@@ -9,9 +9,12 @@ define([
 ], function ($, _, Backbone, JST, moment) {
     'use strict';
 
+    var CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI = 5;
+
     var MuniRowView = Backbone.View.extend({
         template: JST['app/scripts/templates/muni_row.hbs'],
         className: 'muni-row',
+        _caltrainModel: null,
         initialize: function() {
             this.model.bind('change', _.bind(this.render, this));
             this.model.fetch();
@@ -22,27 +25,34 @@ define([
         },
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
-            // //TODO: Explore highlighting departure times that are less than walk times
-            // this.model.get('predictions').forEach(function(curPrediction, index){
-            //     var departsInCell = this.$('tbody > tr').get(index).find('td').get(3);
-            //     if (curPrediction.departureMinutes < this.model.get('minutesToDepartureStop')){
-            //         departsInCell.addClass('color-red');
-            //     }
-            //     else{
-            //         departsInCell.removeClass('color-red');
-            //     }
-            // }, this);
-            return this;
-        }
-        // highlightTimes: function(caltrainModel){
-        //     this.$('muni-prediction-table > tr').removeClass('muni-prediction-unreachable');
+            this.model.get('predictions').forEach(function(curPrediction, index){
+                var curPredictionRow = this.$('tbody > tr').eq(index);
+                var departsInCell = curPredictionRow.find('td').eq(1);
 
-        //     this.model.get('predictions').forEach(function(curPrediction, index){
-        //         if (moment(caltrainModel.departureTime).diff(moment(curPrediction.arrivalMinutes, 'hh:mm A')) < 0){
-        //             this.$('.muni-prediction-table > tbody > tr:nth-of-type(' + (index + 1) + ')').addClass('muni-prediction-unreachable');
-        //         }
-        //     }, this);
-        // }
+                if (curPrediction.departureMinutes < CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI){
+                    departsInCell.addClass('color-red');
+                }
+                else{
+                    departsInCell.removeClass('color-red');
+                }
+
+                if (this._caltrainModel !== null){
+                    if (moment(this._caltrainModel.departureTime).isBefore(curPrediction.arrivalTime)){
+                        curPredictionRow.addClass('color-grey');
+                        departsInCell.removeClass('color-red');
+                    }
+                    else{
+                        curPredictionRow.removeClass('color-grey');
+                    }
+                }
+
+            }, this);
+            return this;
+        },
+        setCaltrainModel: function(caltrainModel){
+            this._caltrainModel = caltrainModel;
+            this.render();
+        }
     });
 
     return MuniRowView;

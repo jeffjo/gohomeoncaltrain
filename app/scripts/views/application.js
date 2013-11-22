@@ -72,7 +72,7 @@ define([
             });
 
             this._caltrainListView.on('click', function (caltrainModel) {
-                this._muniListView.highlightTimes(caltrainModel);
+                this._muniListView.setCaltrainModel(caltrainModel);
             }, this);
 
             this._selectCaltrainView.on('destinationSelected', this._destinationSelected, this);
