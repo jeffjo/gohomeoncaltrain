@@ -17,6 +17,19 @@ define([
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
+        events: {
+            'change #toggle_view_checkbox': 'toggleViewWasChanged'
+        },
+        toggleViewWasChanged: function(ev){
+          if (ev.target.checked){
+              $('#muni_sorted_list_view').hide();
+              $('#muni_list_view').show();
+          }
+          else {
+              $('#muni_sorted_list_view').show();
+              $('#muni_list_view').hide();
+          }
+        },
         initialize: function () {
             //TODO: functionize
             this.caltrainFixtureData = {};

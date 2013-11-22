@@ -14,7 +14,14 @@ $light-grey: #F5F5F5;
 
 #caltrain_view {
     float: left;
-    width: 50%;
+    width: 70%;
+}
+#caltrain_list_view {
+    height: 110px;
+    overflow-y: scroll;
+    border: 1px solid $grey;
+    margin-bottom: 20px;
+    padding: 10px 0;
 }
 
 #select_caltrain_view {
@@ -36,21 +43,29 @@ $light-grey: #F5F5F5;
     background-color: $grey;
 }
 
-#muni_list_view {
-    padding-left: 40px;
-    float: right;
-    width: 25%;
+#muni_list_container{
+    position: relative;
 }
 
+#muni_list_view,
 #muni_sorted_list_view {
-    float: right;
-    width: 25%;
+    position: absolute;
+    border: 1px solid $grey;
+    padding: 20px;
+    width: 100%;
+}
+
+#muni_list_view {
+    display: none;
 }
 
 .muni-row {
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid $grey;
+    &:last-child{
+        border-bottom: none;
+    }
 }
 
 .muni-route-heading {
@@ -83,9 +98,9 @@ $light-grey: #F5F5F5;
 }
 
 #twitter_view {
-    margin-top: 20px;
-    float: left;
-    width: 50%;
+    padding-left: 40px;
+    float: right;
+    width: 30%;
 }
 
 .italic {
