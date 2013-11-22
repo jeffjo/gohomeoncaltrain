@@ -17,8 +17,10 @@ define([
             this.model.forEach(function(value) {
                 var view = new CaltrainRowView({model: value});
                 this.$el.append(view.render().el);
-                view.on('click', function(caltrainModel) {
-                    this.trigger('click', caltrainModel);
+                view.on('click', function(rowView) {
+                    this.$('.caltrain-row').removeClass('is-active');
+                    rowView.$el.addClass('is-active');
+                    this.trigger('click', rowView.model);
                 }, this);
                 this._views.push(view);
 

@@ -63,8 +63,8 @@ define([
                 el: this.$('#muni_list_view')
             });
 
-            this._caltrainListView.on('click', function (/*caltrainModel*/) {
-                //TODO: Update muni list view here
+            this._caltrainListView.on('click', function (caltrainModel) {
+                this._muniListView.highlightTimes(caltrainModel);
             }, this);
 
             this._selectCaltrainView.on('destinationSelected', this._destinationSelected, this);
