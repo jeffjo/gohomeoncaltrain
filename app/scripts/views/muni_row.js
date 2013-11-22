@@ -29,7 +29,7 @@ define([
             }, this));
 
             this.$el.html(this.template(this.model.toJSON()));
-            this.model.get('filteredPredictions').forEach(function(curPrediction, index){
+            this.model.get('filteredPredictions').forEach(function(curPrediction){
                 curPrediction.cuttingClose = curPrediction.departureMinutes < CUTTING_IT_CLOSE_TO_GETTING_TO_MUNI;
             }, this);
             return this;
