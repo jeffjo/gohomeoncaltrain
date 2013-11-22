@@ -38,12 +38,12 @@ define([
                         return arrival.vehicle_id === departure.vehicle_id;
                     })[0];
                     var walkTime = self.get('minutesToDepartureStop');
-                    if(arrival && arrival.minutes > departure.minutes) {
+                    if(arrival && arrival.minutes > departure.minutes && departure.minutes >= walkTime) {
                         predictions.push({
                             'minutesToDepartureStop': walkTime,
                             'departureMinutes': departure.minutes,
                             'arrivalMinutes': arrival.minutes,
-                            'tripTime': walkTime + arrival.minutes - departure.minutes,
+                            'tripMinutes': walkTime + arrival.minutes - departure.minutes,
                             'departureTime': moment().add(departure.seconds, 'seconds'),
                             'arrivalTime': moment().add(arrival.seconds, 'seconds')
                         });

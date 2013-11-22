@@ -19,7 +19,7 @@ define([
             'click': 'clicked'
         },
         clicked: function(){
-            this.trigger('click', this.model);
+            this.trigger('click', this);
         }
 
     });

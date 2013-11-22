@@ -4,8 +4,8 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 #app_container {
     margin: 0 auto;
-    max-width: 768px;
-    min-width: 480px;
+    max-width: 1024px;
+    min-width: 768px;
     padding: 20px;
 }
 
@@ -16,6 +16,19 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 #select_caltrain_view {
     margin-bottom:20px;
+}
+.caltrain-row {
+    height: 30px;
+    line-height: 30px;
+    padding: 5px 0;
+}
+
+.caltrain-row:hover {
+    background-color: #D5D5D5;
+}
+
+.caltrain-row.is-active {
+    background-color:#D5D5D5;
 }
 
 #muni_list_view {
@@ -31,7 +44,7 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     font-weight: bold;
 }
 
-.muni-prediction-departure-minutes {
+.muni-prediction-departure-time {
     font-size: .9em;
     font-style: italic;
 }
@@ -40,13 +53,18 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     width: 100%;
 }
 
+.muni-prediction-table-unreachable {
+    color: red;
+}
+
 .muni-prediction-arrival-time-col {
-    width: 40%;
+    width: 30%;
 }
 
 .muni-prediction-departure-time-col {
-    width: 60%;
+    width: 70%;
 }
+
 
 #twitter_view {
     margin-top: 20px;
@@ -56,3 +74,11 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     font-style: italic;
 }
 
+.is-optimal {
+    background-color: green;
+}
+
+//TODO: Rename me!
+.color-red {
+    color: red;
+}
