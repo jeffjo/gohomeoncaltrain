@@ -39,7 +39,7 @@ define([
                     })[0];
                     var walkTime = self.get('minutesToDepartureStop');
                     if(arrival && arrival.minutes > departure.minutes && departure.minutes >= walkTime) {
-                        predictions.push({
+                        predictions.unshift({
                             'id': self.get('id'),
                             'minutesToDepartureStop': walkTime,
                             'departureMinutes': departure.minutes,
