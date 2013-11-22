@@ -14,6 +14,7 @@ define([
 ], function ($, _, Backbone, JST, caltrainFixtureData, SelectCaltrainView, CaltrainListView, MuniCollection, MuniListView, MuniSortedListView) {
     'use strict';
     var SELECTED_DESTINATION_LOCAL_STORAGE_KEY = 'selectedDestination';
+    var MUNI_DETAIL_VIEW_SELECTED_KEY = 'muniDetailViewSelected';
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
@@ -38,6 +39,8 @@ define([
                 $('#muni_sorted_list_view').show();
                 $('#muni_list_view').hide();
             }
+
+            localStorage.setItem(MUNI_DETAIL_VIEW_SELECTED_KEY, ev.target.checked);
         },
         initialize: function () {
             //TODO: functionize
@@ -100,6 +103,9 @@ define([
 
             this._selectCaltrainView.on('destinationSelected', this._destinationSelected, this);
 
+            if (localStorage.getItem(MUNI_DETAIL_VIEW_SELECTED_KEY) === 'true'){
+                this.$('#toggle_view_checkbox').attr('checked', 'checked').trigger('change');
+            }
             return this;
         },
         _destinationSelected: function(destination){
