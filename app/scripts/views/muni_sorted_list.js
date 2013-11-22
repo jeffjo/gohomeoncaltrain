@@ -15,40 +15,34 @@ define([
             this.collection.on('change', this.render);
         },
         render: function() {
-            this.$el.html(this.template(this.getPredictions()));
+            this.predictions = this.getPredictions();
+            this.$el.html(this.template(this));
             return this;
         },
         getPredictions: function() {
           var predictions = [];
           this.collection.models.forEach(function(model){
             model.get('predictions').forEach(function(prediction){
-              predictions.push(prediction);
-            });
-          });
+                if(!this.departureTime || this.departureTime > prediction.arrivalTime) {
+                    predictions.push(prediction);
+                }
+            }, this);
+          }, this);
+          if(this.departureTime) {
+              predictions = predictions.sort(function(a,b){
+                  var tripTimeA = (this.departureTime - a.arrivalTime)/60000 + a.tripMinutes;
+                  var tripTimeB = (this.departureTime - b.arrivalTime)/60000 + b.tripMinutes;
+                  return tripTimeA - tripTimeB;
+              }.bind(this));
+          }
           return predictions;
         },
         highlightTimes: function(caltrainModel) {
             // Find and highlight min trip time
             var selectedMuniIndex = -1;
             var minTime = Number.MAX_VALUE;
-            var departureTime = caltrainModel.departureTime;
-            this.getPredictions().forEach(function(prediction, index){
-                this.$('tbody > tr').removeClass('is-optimal');
-                if(departureTime > prediction.arrivalTime) {
-                    var tripTime = (departureTime - prediction.arrivalTime)/60000 + prediction.tripMinutes;
-                    if(tripTime < minTime) {
-                        minTime = tripTime;
-                        selectedMuniIndex = index;
-                    }
-                }
-            }, this);
-            if(selectedMuniIndex !== -1) {
-                this.$('tbody > tr').eq(selectedMuniIndex).addClass('is-optimal');
-                this.$('.no-routes-available').hide();
-            }
-            else {
-                this.$('.no-routes-available').show();
-            }
+            this.departureTime = caltrainModel.departureTime;
+            this.render();
         }
     });
     return MuniSortedListView;

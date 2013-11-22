@@ -1,4 +1,7 @@
-<div class='no-routes-available'>No Routes</div>
+{{#if predictions}}
+{{#if departureTime}}
+<p>Muni options sorted by trip time.</p>
+{{/if}}
 <table class='muni-prediction-table'>
     <thead>
         <tr>
@@ -8,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#each this}}
+        {{#each predictions}}
         <tr>
             <td>{{id}}</td>
             <td>{{departureMinutes}} min.</td>
@@ -17,3 +20,7 @@
         {{/each}}
     </tbody>
 </table>
+{{else}}
+<p>Sorry, no muni options available to make this train.</p>
+{{/if}}
+
