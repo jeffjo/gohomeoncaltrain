@@ -38,11 +38,13 @@ define([
 
                 if (this._caltrainModel !== null){
                     if (moment(this._caltrainModel.departureTime).isBefore(curPrediction.arrivalTime)){
-                        curPredictionRow.addClass('color-grey');
+                        // curPredictionRow.addClass('color-grey');
+                        curPredictionRow.hide();
                         departsInCell.removeClass('color-red');
                     }
                     else{
-                        curPredictionRow.removeClass('color-grey');
+                        // curPredictionRow.removeClass('color-grey');
+                        curPredictionRow.show();
                     }
                 }
 

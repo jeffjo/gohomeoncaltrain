@@ -2,13 +2,16 @@
   <div id='select_caltrain_view'></div>
   <div id='caltrain_list_view'></div>
   <div id="muni_list_container">
+    <div>
+      <input type="checkbox" id="toggle_view_checkbox"/>
+      <label for="toggle_view_checkbox">Show More MUNI Details</label>
+    </div>
     <div id='muni_list_view'></div>
     <div id='muni_sorted_list_view'></div>
   </div>
 </div>
 <div id='twitter_view'>
   {{> twitter}}
-  <input type="checkbox" id="toggle_view_checkbox"/>
 </div>
 
 <!-- consider importing the grid component and using l-row -->
