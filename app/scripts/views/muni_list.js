@@ -16,6 +16,7 @@ define([
             this.collection.fetch({reset: true});
         },
         _views: [],
+        _caltrainModel: null,
         render: function(){
             this.$el.html(this.template(this));
             this.collection.forEach(function(model){
@@ -25,31 +26,12 @@ define([
             }, this);
             return this;
         },
-        highlightTimes: function(caltrainModel) {
-            // Find and highlight min trip time
-            var selectedMuniView = null, selectedMuniIndex = -1;
-            var minTime = Number.MAX_VALUE;
-            var departureTime = caltrainModel.departureTime;
-            this._views.forEach(function(curRowView){
-                curRowView.$('tbody > tr').removeClass('is-optimal');
-                curRowView.model.get('predictions').forEach(function(prediction, index){
-                  if(departureTime > prediction.arrivalTime) {
-                    var tripTime = (departureTime - prediction.arrivalTime)/60000 + prediction.tripMinutes;
-                    if(tripTime < minTime) {
-                      minTime = tripTime;
-                      selectedMuniView = curRowView;
-                      selectedMuniIndex = index;
-                    }
-                  }
-                });
+        setCaltrainModel: function(caltrainModel) {
+            this._caltrainModel = caltrainModel;
+
+            this._views.forEach(function(curView){
+                curView.setCaltrainModel(caltrainModel);
             });
-            if(selectedMuniView) {
-                selectedMuniView.$('tbody > tr').eq(selectedMuniIndex).addClass('is-optimal');
-                this.$('.no-routes-available').hide();
-            }
-            else {
-                this.$('.no-routes-available').show();
-            }
         }
     });
 

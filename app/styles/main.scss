@@ -2,6 +2,9 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
+$grey: #E5E5E5;
+$light-grey: #F5F5F5;
+
 #app_container {
     margin: 0 auto;
     max-width: 1024px;
@@ -20,18 +23,21 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 .caltrain-row {
     height: 30px;
     line-height: 30px;
-    padding: 5px 0;
+    padding: 0 25px;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 .caltrain-row:hover {
-    background-color: #D5D5D5;
+    background-color: $light-grey;
 }
 
 .caltrain-row.is-active {
-    background-color:#D5D5D5;
+    background-color: $grey;
 }
 
 #muni_list_view {
+    padding-left: 40px;
     float: right;
     width: 25%;
 }
@@ -43,6 +49,8 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 .muni-row {
     margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $grey;
 }
 
 .muni-route-heading {
@@ -74,9 +82,10 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
     width: 50%;
 }
 
-
 #twitter_view {
     margin-top: 20px;
+    float: left;
+    width: 50%;
 }
 
 .italic {
@@ -89,5 +98,9 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 //TODO: Rename me!
 .color-red {
-    color: red;
+    color: #ff4040;
+}
+
+.color-grey {
+    color: #EEE !important;
 }
