@@ -42,10 +42,10 @@ module.exports = function (grunt) {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
             },
-            coffeeTest: {
-                files: ['test/spec/{,*/}*.coffee'],
-                tasks: ['coffee:test']
-            },
+            // coffeeTest: {
+            //     files: ['test/spec/{,*/}*.coffee'],
+            //     tasks: ['coffee:test']
+            // },
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass']
@@ -68,11 +68,11 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/scripts/templates/*.hbs'
                 ],
                 tasks: ['handlebars']
-            },
-            test: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
-                tasks: ['test']
             }
+            // test: {
+            //     files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
+            //     tasks: ['test']
+            // }
         },
         connect: {
             options: {
