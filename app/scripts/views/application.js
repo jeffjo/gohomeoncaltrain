@@ -27,7 +27,7 @@ define([
                 $('#caltrain_list_view').css('height', '100%');
             }
             else{
-                $('#caltrain_list_view').css('height', '110px');
+                $('#caltrain_list_view').css('height', '140px');
             }
         },
         toggleViewWasChanged: function(ev){
@@ -56,7 +56,8 @@ define([
                     this._coerceDateToCurrent(arrivalTime, currentDate);
                     this.caltrainFixtureData[key].push({
                         departureTime: departureTime,
-                        arrivalTime: arrivalTime
+                        arrivalTime: arrivalTime,
+                        tripType: value.tripType
                     });
                 }, this);
             }.bind(this));
