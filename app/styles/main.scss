@@ -4,6 +4,8 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 $grey: #E5E5E5;
 $light-grey: #F5F5F5;
+$red: #ff4040;
+$yellow: #EEDB00;
 
 #app_container {
     margin: 0 auto;
@@ -17,8 +19,9 @@ $light-grey: #F5F5F5;
     width: 70%;
 }
 #caltrain_list_view {
-    height: 110px;
+    height: 140px;
     overflow-y: scroll;
+    overflow-x: hidden;
     border: 1px solid $grey;
     margin-bottom: 20px;
     padding: 10px 0;
@@ -33,14 +36,33 @@ $light-grey: #F5F5F5;
     padding: 0 25px;
     vertical-align: middle;
     cursor: pointer;
+    &:hover {
+        background-color: $light-grey;
+    }
 }
 
-.caltrain-row:hover {
-    background-color: $light-grey;
+.caltrain-header-col {
+  padding: 0;
+}
+
+.caltrain-list-header {
+  font-weight: bold;
+  @extend .caltrain-row;
+  &:hover {
+      background-color: transparent;
+  }
 }
 
 .caltrain-row.is-active {
     background-color: $grey;
+}
+
+.trip-type-bullet {
+    color: $red;
+}
+
+.trip-type-limited {
+    color: $yellow;
 }
 
 #muni_list_container{
@@ -107,13 +129,9 @@ $light-grey: #F5F5F5;
     font-style: italic;
 }
 
-.is-optimal {
-    color: #00d912;
-}
-
 //TODO: Rename me!
 .color-red {
-    color: #ff4040;
+    color: $red;
 }
 
 .color-grey {

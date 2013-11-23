@@ -17,7 +17,7 @@
     //TODO: Make this an optional parameter?
     var DATA_URL = 'http://www.gtfs-data-exchange.com/agency/caltrain/latest.zip';
     //TODO: Make this a parameter??
-    var outputFile = "../app/scripts/models/caltrain_fixture.json";
+    var outputFile = "../app/scripts/models/json/caltrain_fixture.json";
     var calendar = [],
         trips = [],
         stopTimes = [],
@@ -64,18 +64,20 @@
 
             trips.forEach(function(element){
                 if(serviceIds[element.service_id] && (element.direction_id === "1"))
-                    tripIds[element.trip_id] = true;
+                    //Store the trip type (local, limited, bullet)
+                    tripIds[element.trip_id] = element.route_id.split('_')[1];
             });
 
             stopTimes.forEach(function(element, index, array){
-                if (tripIds[element.trip_id]){
+                if (tripIds.hasOwnProperty(element.trip_id) && (element.stop_id !== 'San Francisco Caltrain')){
                     if (!stops[element.stop_id]){
                         stops[element.stop_id] = [];
                     }
                     departureTime = parseTime(array[index - (element.stop_sequence - 1)].departure_time);
                     stops[element.stop_id].push({
                         arrivalTime: parseTime(element.arrival_time),
-                        departureTime: departureTime
+                        departureTime: departureTime,
+                        tripType: tripIds[element.trip_id]
                     });
                 }
             });

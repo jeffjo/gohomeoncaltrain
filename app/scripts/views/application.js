@@ -15,6 +15,7 @@ define([
     'use strict';
     var SELECTED_DESTINATION_LOCAL_STORAGE_KEY = 'selectedDestination';
     var MUNI_DETAIL_VIEW_SELECTED_KEY = 'muniDetailViewSelected';
+    var CALTRAIN_LIST_REFRESH_INTERVAL_SECONDS = 60;
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
@@ -27,7 +28,7 @@ define([
                 $('#caltrain_list_view').css('height', '100%');
             }
             else{
-                $('#caltrain_list_view').css('height', '110px');
+                $('#caltrain_list_view').css('height', '140px');
             }
         },
         toggleViewWasChanged: function(ev){
@@ -56,7 +57,8 @@ define([
                     this._coerceDateToCurrent(arrivalTime, currentDate);
                     this.caltrainFixtureData[key].push({
                         departureTime: departureTime,
-                        arrivalTime: arrivalTime
+                        arrivalTime: arrivalTime,
+                        tripType: value.tripType
                     });
                 }, this);
             }.bind(this));
@@ -68,7 +70,7 @@ define([
         },
         render: function () {
             this.$el.html(this.template(this));
-            var savedSelectedDestination = localStorage.getItem(SELECTED_DESTINATION_LOCAL_STORAGE_KEY);
+            var savedSelectedDestination = localStorage.getItem(SELECTED_DESTINATION_LOCAL_STORAGE_KEY) || Object.keys(this.caltrainFixtureData)[0];
             this._selectCaltrainView = new SelectCaltrainView({
                 model: Object.keys(this.caltrainFixtureData),
                 el: this.$('#select_caltrain_view'),
@@ -83,6 +85,10 @@ define([
             if (savedSelectedDestination !== null){
                 this._destinationSelected(savedSelectedDestination);
             }
+
+            setInterval(function(){
+                this._destinationSelected(this._selectCaltrainView.selectedDestination)
+            }.bind(this), CALTRAIN_LIST_REFRESH_INTERVAL_SECONDS * 1000);
 
             this.muniCollection = new MuniCollection();
 

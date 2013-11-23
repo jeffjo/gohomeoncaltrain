@@ -1,2 +1,7 @@
-{{formatDate departureTime 'hh:mm A'}} - {{formatDate arrivalTime 'hh:mm A'}} ({{timeDiffInMinutes departureTime arrivalTime}} minutes)
+<div class='row'>
+  <div class='col-lg-3'>{{formatDate departureTime 'hh:mm A'}}</div>
+  <div class='col-lg-3'>{{formatDate arrivalTime 'hh:mm A'}}</div>
+  <div class='col-lg-3 trip-type-{{tripType}}'>{{tripType}}</div>
+  <div class='col-lg-3'>{{timeDiffInMinutes departureTime arrivalTime}} minutes</div>
+</div>
 
