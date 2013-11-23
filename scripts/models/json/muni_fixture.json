@@ -1,0 +1,30 @@
+[
+    {
+        "id": "47",
+        "minutesToDepartureStop": 3,
+        "departureStopId": "13243",
+        "departureStopName": "11th & Mission",
+        "arrivalStopId": "133163"
+    },
+    {
+        "id": "83X",
+        "minutesToDepartureStop": 4,
+        "departureStopId": "17669",
+        "departureStopName": "9th & Market",
+        "arrivalStopId": "133163"
+    },
+    {
+        "id": "N",
+        "minutesToDepartureStop": 1,
+        "departureStopId": "15419",
+        "departureStopName": "Van Ness Station",
+        "arrivalStopId": "15239"
+    },
+    {
+        "id": "KT",
+        "minutesToDepartureStop": 1,
+        "departureStopId": "15419",
+        "departureStopName": "Van Ness Station",
+        "arrivalStopId": "17397"
+    }
+]
