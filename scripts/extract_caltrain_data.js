@@ -69,7 +69,7 @@
             });
 
             stopTimes.forEach(function(element, index, array){
-                if (tripIds.hasOwnProperty(element.trip_id)){
+                if (tripIds.hasOwnProperty(element.trip_id) && (element.stop_id !== 'San Francisco Caltrain')){
                     if (!stops[element.stop_id]){
                         stops[element.stop_id] = [];
                     }

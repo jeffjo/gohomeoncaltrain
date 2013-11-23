@@ -70,7 +70,7 @@ define([
         },
         render: function () {
             this.$el.html(this.template(this));
-            var savedSelectedDestination = localStorage.getItem(SELECTED_DESTINATION_LOCAL_STORAGE_KEY);
+            var savedSelectedDestination = localStorage.getItem(SELECTED_DESTINATION_LOCAL_STORAGE_KEY) || Object.keys(this.caltrainFixtureData)[0];
             this._selectCaltrainView = new SelectCaltrainView({
                 model: Object.keys(this.caltrainFixtureData),
                 el: this.$('#select_caltrain_view'),
