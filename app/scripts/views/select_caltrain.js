@@ -11,12 +11,12 @@ define([
     var SelectCaltrainView = Backbone.View.extend({
         initialize: function(options){
             this.selectModel = [];
-
+            this.selectedDestination = options.selectedDestination;
             this.model.forEach(function (value) {
                 this.selectModel.push({
                     value: value,
                     text: value,
-                    isSelected: (value === options.selectedDestination)
+                    isSelected: (value === this.selectedDestination)
                 });
             }, this);
         },
@@ -29,12 +29,12 @@ define([
             'change #destination_caltrain_select': 'caltrainDestinationDidChange'
         },
         caltrainDestinationDidChange: function(){
-            var selectedValue = this.$('#destination_caltrain_select').val();
+            this.selectedDestination = this.$('#destination_caltrain_select').val();
             //TODO: try to optimize
             this.selectModel.forEach(function (value) {
-                value.isSelected = (value.value === selectedValue);
-            });
-            this.trigger('destinationSelected', selectedValue);
+                value.isSelected = (value.value === this.selectedDestination);
+            }, this);
+            this.trigger('destinationSelected', this.selectedDestination);
         }
     });
 

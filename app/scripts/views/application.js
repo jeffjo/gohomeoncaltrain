@@ -15,6 +15,7 @@ define([
     'use strict';
     var SELECTED_DESTINATION_LOCAL_STORAGE_KEY = 'selectedDestination';
     var MUNI_DETAIL_VIEW_SELECTED_KEY = 'muniDetailViewSelected';
+    var CALTRAIN_LIST_REFRESH_INTERVAL_SECONDS = 60;
 
     var ApplicationView = Backbone.View.extend({
         template: JST['app/scripts/templates/application.hbs'],
@@ -84,6 +85,10 @@ define([
             if (savedSelectedDestination !== null){
                 this._destinationSelected(savedSelectedDestination);
             }
+
+            setInterval(function(){
+                this._destinationSelected(this._selectCaltrainView.selectedDestination)
+            }.bind(this), CALTRAIN_LIST_REFRESH_INTERVAL_SECONDS * 1000);
 
             this.muniCollection = new MuniCollection();
 
